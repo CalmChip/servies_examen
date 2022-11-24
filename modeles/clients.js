@@ -22,7 +22,7 @@ module.exports.getClientsById = (idClient, callback) => {
   Clients.findById(filtre, callback);
 };
 
-// API pour obtenir un client via texte dans...
+// API pour obtenir un client via son telephhone
 module.exports.getClientsByFilter = (filter, callback, limit) => {
     Clients.find({ telephone: filter  }, callback) 
     .limit(limit)
@@ -45,10 +45,9 @@ module.exports.modifierUnClient = (query, newClient, callback) => {
   let filtre = { telephone: query };
   let options = {};
   let nouveauClient = {
-    _id: newClient._id,
     nom: newClient.nom,
     adresse: newClient.adresse,
-    date: Date.now(), // ou newClient.date
+    date: Date.now(), 
     telephone: newClient.telephone,
   };
   Clients.findOneAndUpdate(filtre, nouveauClient, options, callback);

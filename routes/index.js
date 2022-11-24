@@ -10,24 +10,17 @@ router.get("/api/clients", (requete, reponse) => {
     }, 250); // 250 = limit
 });
 
-router.get("/api/clients/:filter", (requete, reponse) => {
+// Route qui permet
+router.get("/api/clients/:telephone", (requete, reponse) => {
     Clients.getClientsByFilter(
-        requete.params.filter,
+        requete.params.telephone,
         (err, clients) => {
           if (err) throw err;
           reponse.json(clients);
         },
-        250
+        250 // 250 = limit
       );
 })
-
-// Route qui permet d'obtenir un client
-router.get("/api/clients/:id", (requete, reponse) => {
-    Clients.getClientsById(requete.params.id, (err, clients) => {
-        if (err) throw err;
-        reponse.json(clients);
-    });
-});
 
 // Route qui creer un nouveau client
 router.post("/api/clients", (requete, reponse) => {
@@ -39,8 +32,8 @@ router.post("/api/clients", (requete, reponse) => {
 });
 
 // Route qui delete un client
-router.delete("/api/clients/:id", (requete, reponse) => {
-    Clients.deleteUnClient(requete.params.id, (err, clients) => {
+router.delete("/api/clients/:telephone", (requete, reponse) => {
+    Clients.deleteUnClient(requete.params.telephone, (err, clients) => {
         if (err) throw err;
         reponse.json(clients);
     });
